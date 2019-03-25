@@ -16,7 +16,6 @@ extern Dio_Channel_S_t Elements[Num_Channels];
 /*Syncrounous and Renterant*/
 Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
 {
-    uint8_t index;
     /*Variable To Hold The returned Value*/
     Dio_LevelType Pin_Level;
 
@@ -58,7 +57,7 @@ void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
     switch (Elements[ChannelId].Port)
     {
     case 0:
-        Set_Bit(PORTA->DATA,Elements[ChannelId].Channel);
+        Set_Bit(PORTA->DATA, Elements[ChannelId].Channel);
         break;
     case 1:
         Set_Bit(PORTB->DATA, Elements[ChannelId].Channel);
@@ -81,4 +80,58 @@ void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
 
     }
 
+}
+
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
+{
+    Dio_PortLevelType Port_Data;
+    switch (PortId)
+    {
+    case 0:
+        Port_Data = PORTA->DATA;
+        break;
+    case 1:
+        Port_Data = PORTB->DATA;
+        break;
+    case 2:
+        Port_Data = PORTC->DATA;
+        break;
+    case 3:
+        Port_Data = PORTD->DATA;
+        break;
+    case 4:
+        Port_Data = PORTE->DATA;
+        break;
+    case 5:
+        Port_Data = PORTF->DATA;
+        break;
+    default:
+        break;
+    }
+}
+void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
+{
+    switch(PortId)
+    {
+    case 0:
+        PORTA->DATA = Level;
+        break;
+    case 1:
+        PORTB->DATA = Level;
+        break;
+    case 2:
+        PORTC->DATA = Level;
+        break;
+    case 3:
+        PORTD->DATA = Level;
+        break;
+    case 4:
+        PORTE->DATA = Level;
+        break;
+    case 5:
+        PORTE->DATA = Level;
+        break;
+    default:
+        break;
+    }
 }

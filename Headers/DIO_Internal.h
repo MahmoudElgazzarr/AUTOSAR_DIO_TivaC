@@ -9,11 +9,19 @@
 
 #ifndef HEADERS_DIO_INTERNAL_H_
 #define HEADERS_DIO_INTERNAL_H_
-
+enum Register_R
+{
+    PORTA_R,
+    PORTB_R,
+    PORTC_R,
+    PORTD_R,
+    PORTE_R,
+    PORTF_R
+};
 enum Channels
 {
 Channel0,
-Channell,
+Channel1,
 Channel2,
 Channel3,
 Channel4,

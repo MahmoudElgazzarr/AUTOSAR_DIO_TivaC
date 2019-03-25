@@ -17,6 +17,11 @@
  * */
 typedef uint8_t Dio_ChannelType;
 
+/*typedef for Dio_PortLevelType
+ * [SWS_Dio_00186]
+ * */
+typedef uint32_t Dio_PortLevelType;
+
 /*Specifies if the pin is std_high or std_low*/
 typedef uint8_t Dio_LevelType;
 
@@ -51,4 +56,8 @@ Dio_LevelType Dio_ReadChannel( Dio_ChannelType ChannelId );
 /*Dio Read Channel Definition*/
 void Dio_WriteChannel( Dio_ChannelType ChannelId, Dio_LevelType Level );
 
+/*Dio Read Port Definition*/
+Dio_PortLevelType Dio_ReadPort( Dio_PortType PortId );
+/*Dio Write Port Definition*/
+void Dio_WritePort( Dio_PortType PortId, Dio_PortLevelType Level );
 #endif /* HEADERS_DIO_H_ */

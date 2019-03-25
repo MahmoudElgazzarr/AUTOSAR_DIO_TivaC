@@ -11,5 +11,5 @@
 #include "DIO.h"
 #include "DIO_Internal.h"
 
-Dio_Channel_S_t Elements[Num_Channels]={{PORTF,Channel0,OUTPUT}};
+Dio_Channel_S_t Elements[Num_Channels]={{PORTF_R,Channel3,OUTPUT}};
 
