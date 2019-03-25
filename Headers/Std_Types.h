@@ -18,5 +18,12 @@ enum Voltage_Level
     STD_HIGH = (uint8_t)0x01
 };
 
+/*Not Standard*/
+
+enum PIN_INPUT_OUTPUT
+{
+    OUTPUT = (uint8_t) 0U,
+    INPUT = (uint8_t)  1U
+};
 
 #endif /* HEADERS_STD_TYPES_H_ */

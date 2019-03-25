@@ -8,8 +8,7 @@
 #ifndef HEADERS_DIO_CFG_H_
 #define HEADERS_DIO_CFG_H_
 
-#define Num_Channels 5
-//extern Dio_Channel_S_t Elements[Num_Channels];
+#define Num_Channels 1
 
 
 #endif /* HEADERS_DIO_CFG_H_ */
