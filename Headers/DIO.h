@@ -60,4 +60,7 @@ void Dio_WriteChannel( Dio_ChannelType ChannelId, Dio_LevelType Level );
 Dio_PortLevelType Dio_ReadPort( Dio_PortType PortId );
 /*Dio Write Port Definition*/
 void Dio_WritePort( Dio_PortType PortId, Dio_PortLevelType Level );
+/**/
+void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_PortLevelType Level );
+
 #endif /* HEADERS_DIO_H_ */

@@ -11,7 +11,7 @@
 /*Set Bit and Clear Bit */
 #define Set_Bit(Register,Bit) ((Register) = ((Register)|(1<<(uint8_t)(Bit))))
 
-#define Clear_Bit(Register,Bit) ((Register) &= ~(1<<((uint8_t))(Bit)))
+#define Clear_Bit(Register,Bit) ((Register) &= ~(1<<(uint8_t)(Bit)))
 
 #define Get_Bit(Register,Bit) (((Register)&(1<<(uint8_t)(Bit)))>>(uint8_t)(Bit))
 

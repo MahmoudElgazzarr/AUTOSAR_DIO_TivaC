@@ -8,7 +8,7 @@
 #ifndef HEADERS_DIO_CFG_H_
 #define HEADERS_DIO_CFG_H_
 
-#define Num_Channels 1
+#define Num_Channels 2
 
 
 #endif /* HEADERS_DIO_CFG_H_ */

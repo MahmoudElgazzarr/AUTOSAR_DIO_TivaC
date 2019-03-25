@@ -26,22 +26,22 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
     /*Switch Ports and Read From Specified Port*/
     switch (Elements[ChannelId].Port)
     {
-    case 0:
+    case (uint8_t)0:
         Pin_Level = Get_Bit(PORTA->DATA, Elements[ChannelId].Channel);
         break;
-    case 1:
+    case (uint8_t)1:
         Pin_Level = Get_Bit(PORTB->DATA, Elements[ChannelId].Channel);
         break;
-    case 2:
+    case (uint8_t)2:
         Pin_Level = Get_Bit(PORTC->DATA, Elements[ChannelId].Channel);
         break;
-    case 3:
+    case (uint8_t)3:
         Pin_Level = Get_Bit(PORTD->DATA, Elements[ChannelId].Channel);
         break;
-    case 4:
+    case (uint8_t)4:
         Pin_Level = Get_Bit(PORTE->DATA, Elements[ChannelId].Channel);
         break;
-    case 5:
+    case (uint8_t)5:
         Pin_Level = Get_Bit(PORTF->DATA, Elements[ChannelId].Channel);
         break;
     default:
@@ -51,29 +51,86 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
     return Pin_Level;
 }
 
-/*Syncrounous and Renterant*/
+/*Syncrounous and Renterant
+ * [SWS_Dio_00028]
+ * */
 void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
 {
     switch (Elements[ChannelId].Port)
     {
     case 0:
-        Set_Bit(PORTA->DATA, Elements[ChannelId].Channel);
-        break;
+        /*Set Bit STD_HIGH*/
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTA->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTA->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     case 1:
-        Set_Bit(PORTB->DATA, Elements[ChannelId].Channel);
-        break;
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTB->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTB->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     case 2:
-        Set_Bit(PORTC->DATA, Elements[ChannelId].Channel);
-        break;
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTC->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTC->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     case 3:
-        Set_Bit(PORTD->DATA, Elements[ChannelId].Channel);
-        break;
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTD->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTD->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     case 4:
-        Set_Bit(PORTE->DATA, Elements[ChannelId].Channel);
-        break;
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTE->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTE->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     case 5:
-        Set_Bit(PORTF->DATA, Elements[ChannelId].Channel);
-        break;
+        if (Level == STD_HIGH)
+        {
+            Set_Bit(PORTF->DATA, Elements[ChannelId].Channel);
+            break;
+        }
+        /*Set Bit STD_LOW*/
+        else
+        {
+            Clear_Bit(PORTF->DATA, Elements[ChannelId].Channel);
+            break;
+        }
     default:
         /*report Error To Det*/
         break;
@@ -108,10 +165,11 @@ Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
     default:
         break;
     }
+    return Port_Data;
 }
 void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
 {
-    switch(PortId)
+    switch (PortId)
     {
     case 0:
         PORTA->DATA = Level;
@@ -134,4 +192,8 @@ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
     default:
         break;
     }
+}
+void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_PortLevelType Level )
+{
+
 }
