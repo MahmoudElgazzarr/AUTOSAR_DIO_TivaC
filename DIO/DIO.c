@@ -12,10 +12,12 @@
 #include "DIO.h"
 
 extern Dio_Channel_S_t Channels_Elements[Num_Channels];
+extern Dio_Port_S_t Ports_Elements[Num_Ports];
 
 /*Syncrounous and Renterant*/
 Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
 {
+    /*Todo Check Version Of Autosar Here*/
     /*Variable To Hold The returned Value*/
     Dio_LevelType Pin_Level;
     Dio_ChannelType arr_index, Channel_Place_In_arr;
@@ -72,10 +74,10 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
     }
     else
     {
-        #ifdef DIO_DEV_ERROR_DETECT
+#ifdef DIO_DEV_ERROR_DETECT
         Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
                         DIO_E_PARAM_INVALID_CHANNEL_ID);
-        #endif
+#endif
     }
 }
 
@@ -84,6 +86,7 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
  * */
 void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
 {
+    /*Todo Check Version Of Autosar Here*/
     if ((ChannelId > MIN_NUM_CHANNELS) && (ChannelId < MAX_NUM_CHANNELS))
     {
         Dio_ChannelType arr_index, Channel_Place_In_arr;
@@ -212,60 +215,86 @@ void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
 
 Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
 {
+    /*Todo Check Version Of Autosar Here*/
     Dio_PortLevelType Port_Data;
-    switch (PortId)
+    if ((PortId >= MIN_NUM_PORTS) && (PortId <= MAX_NUM_PORTS))
     {
-    case 0:
-        Port_Data = PORTA->DATA;
-        break;
-    case 1:
-        Port_Data = PORTB->DATA;
-        break;
-    case 2:
-        Port_Data = PORTC->DATA;
-        break;
-    case 3:
-        Port_Data = PORTD->DATA;
-        break;
-    case 4:
-        Port_Data = PORTE->DATA;
-        break;
-    case 5:
-        Port_Data = PORTF->DATA;
-        break;
-    default:
-        break;
+        switch (PortId)
+        {
+        case 0:
+            Port_Data = PORTA->DATA;
+            break;
+        case 1:
+            Port_Data = PORTB->DATA;
+            break;
+        case 2:
+            Port_Data = PORTC->DATA;
+            break;
+        case 3:
+            Port_Data = PORTD->DATA;
+            break;
+        case 4:
+            Port_Data = PORTE->DATA;
+            break;
+        case 5:
+            Port_Data = PORTF->DATA;
+            break;
+        default:
+            break;
+        }
+        return Port_Data;
     }
-    return Port_Data;
+    else
+    {
+        /*Report Invalid Port Number*/
+#ifdef DIO_DEV_ERROR_DETECT
+        Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
+                        DIO_E_PARAM_INVALID_PORT_ID);
+#endif
+    }
 }
 void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
 {
-    switch (PortId)
+    /*Todo Check Version Of Autosar Here*/
+    /*Todo Check Port ID if valid or not*/
+    if ((PortId >= MIN_NUM_PORTS) && (PortId <= MAX_NUM_PORTS))
     {
-    case 0:
-        PORTA->DATA = Level;
-        break;
-    case 1:
-        PORTB->DATA = Level;
-        break;
-    case 2:
-        PORTC->DATA = Level;
-        break;
-    case 3:
-        PORTD->DATA = Level;
-        break;
-    case 4:
-        PORTE->DATA = Level;
-        break;
-    case 5:
-        PORTE->DATA = Level;
-        break;
-    default:
-        break;
+        switch (PortId)
+        {
+        case 0:
+            PORTA->DATA = Level;
+            break;
+        case 1:
+            PORTB->DATA = Level;
+            break;
+        case 2:
+            PORTC->DATA = Level;
+            break;
+        case 3:
+            PORTD->DATA = Level;
+            break;
+        case 4:
+            PORTE->DATA = Level;
+            break;
+        case 5:
+            PORTE->DATA = Level;
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
+#ifdef DIO_DEV_ERROR_DETECT
+        Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
+                        DIO_E_PARAM_INVALID_PORT_ID);
+#endif
+
     }
 }
 void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,
                            Dio_PortLevelType Level)
+/*Todo Check Version Of Autosar Here*/
 {
 
 }

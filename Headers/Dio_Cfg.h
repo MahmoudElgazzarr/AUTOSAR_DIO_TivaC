@@ -14,4 +14,7 @@
 #define MIN_NUM_CHANNELS 0
 #define MAX_NUM_CHANNELS 43
 
+#define MIN_NUM_PORTS 0
+#define MAX_NUM_PORTS 6
+
 #endif /* HEADERS_DIO_CFG_H_ */
