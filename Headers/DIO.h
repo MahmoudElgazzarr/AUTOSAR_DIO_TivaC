@@ -11,6 +11,13 @@
 #ifndef HEADERS_DIO_H_
 #define HEADERS_DIO_H_
 
+
+#define DIO_DEV_ERROR_DETECT (uint8)(1)
+
+#define DIO_ModuleId 0
+#define DIO_InstanceId 0
+#define DIO_ApiId 0
+
 /*Dio Channel Type Typedef that defines which pin to use Numaric
  * [SWS_Dio_00015]
  * */

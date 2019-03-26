@@ -11,5 +11,8 @@
 #include "DIO.h"
 #include "DIO_Internal.h"
 
-Dio_Channel_S_t Elements[Num_Channels]={{channel39_ID,PORTF_R,Channel1,OUTPUT},{channel40_ID,PORTF_R,Channel2,OUTPUT}};
+Dio_Channel_S_t Elements[Num_Channels] = { { channel39_ID, PORTF_R, Channel1,
+                                             OUTPUT },
+                                           { channel40_ID, PORTF_R, Channel2,
+                                             OUTPUT } };
 
