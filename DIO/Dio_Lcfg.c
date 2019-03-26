@@ -19,3 +19,5 @@ Dio_Channel_S_t Channels_Elements[Num_Channels] = { { channel39_ID, PORTF_R,
 
 /*Array Of Structure of Ports Add By User*/
 Dio_Port_S_t Ports_Elements[Num_Ports] = { { PORTA_ID, PORTA_R, OUTPUT } };
+
+/**/
