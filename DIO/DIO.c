@@ -18,31 +18,38 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
 {
     /*Variable To Hold The returned Value*/
     Dio_LevelType Pin_Level;
+    Dio_ChannelType arr_index,Channel_Place_In_arr;
 
-    if (Elements[ChannelId].Dir == OUTPUT)
+
+    /*Conver Index Of Channel To Arr Index As Index Is Not Configured*/
+    for (arr_index = 0; arr_index < Num_Channels; arr_index++)
     {
-        /*Report Error To Det and return Error*/
+        if (ChannelId == Elements[arr_index].Channel_ID)
+        {
+            Channel_Place_In_arr = arr_index;
+            break;
+        }
     }
     /*Switch Ports and Read From Specified Port*/
-    switch (Elements[ChannelId].Port)
+    switch (Elements[Channel_Place_In_arr].Port)
     {
-    case (uint8_t)0:
-        Pin_Level = Get_Bit(PORTA->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 0:
+        Pin_Level = Get_Bit(PORTA->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
-    case (uint8_t)1:
-        Pin_Level = Get_Bit(PORTB->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 1:
+        Pin_Level = Get_Bit(PORTB->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
-    case (uint8_t)2:
-        Pin_Level = Get_Bit(PORTC->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 2:
+        Pin_Level = Get_Bit(PORTC->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
-    case (uint8_t)3:
-        Pin_Level = Get_Bit(PORTD->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 3:
+        Pin_Level = Get_Bit(PORTD->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
-    case (uint8_t)4:
-        Pin_Level = Get_Bit(PORTE->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 4:
+        Pin_Level = Get_Bit(PORTE->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
-    case (uint8_t)5:
-        Pin_Level = Get_Bit(PORTF->DATA, Elements[ChannelId].Channel);
+    case (uint8_t) 5:
+        Pin_Level = Get_Bit(PORTF->DATA, Elements[Channel_Place_In_arr].Channel);
         break;
     default:
         /*report Error To Det*/
@@ -56,79 +63,90 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
  * */
 void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
 {
-    switch (Elements[ChannelId].Port)
+    Dio_ChannelType arr_index,Channel_Place_In_arr;
+    /*Conver Index Of Channel To Arr Index As Index Is Not Configured*/
+       for (arr_index = 0; arr_index < Num_Channels; arr_index++)
+       {
+           if (ChannelId == Elements[arr_index].Channel_ID)
+           {
+               Channel_Place_In_arr = arr_index;
+               break;
+           }
+       }
+
+    switch (Elements[Channel_Place_In_arr].Port)
     {
     case 0:
         /*Set Bit STD_HIGH*/
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTA->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTA->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTA->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTA->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     case 1:
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTB->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTB->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTB->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTB->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     case 2:
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTC->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTC->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTC->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTC->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     case 3:
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTD->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTD->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTD->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTD->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     case 4:
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTE->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTE->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTE->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTE->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     case 5:
         if (Level == STD_HIGH)
         {
-            Set_Bit(PORTF->DATA, Elements[ChannelId].Channel);
+            Set_Bit(PORTF->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
         /*Set Bit STD_LOW*/
         else
         {
-            Clear_Bit(PORTF->DATA, Elements[ChannelId].Channel);
+            Clear_Bit(PORTF->DATA, Elements[Channel_Place_In_arr].Channel);
             break;
         }
     default:
@@ -193,7 +211,8 @@ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
         break;
     }
 }
-void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_PortLevelType Level )
+void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,
+                           Dio_PortLevelType Level)
 {
 
 }

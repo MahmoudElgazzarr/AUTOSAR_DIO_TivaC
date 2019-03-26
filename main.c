@@ -27,13 +27,13 @@ void main(void)
     PORTF->DEN = 0xff ;
     while(1)
     {
-        Dio_WriteChannel(0,STD_HIGH);
-        Dio_WriteChannel(1,STD_HIGH);
+        Dio_WriteChannel(channel39_ID,STD_HIGH);
+        Dio_WriteChannel(channel40_ID,STD_HIGH);
         for(i=0;i<1000000;i++)
         {
         }
-        Dio_WriteChannel(0,STD_LOW);
-        Dio_WriteChannel(1,STD_LOW);
+        Dio_WriteChannel(channel39_ID,STD_LOW);
+        Dio_WriteChannel(channel40_ID,STD_LOW);
         for(i=0;i<1000000;i++)
         {
         }
