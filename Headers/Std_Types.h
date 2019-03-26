@@ -17,9 +17,11 @@ enum Voltage_Level
     STD_LOW = (uint8_t) 0x00,
     STD_HIGH = (uint8_t)0x01
 };
+/*uint8 Function Return Type*/
+typedef uint8_t Std_ReturnType;
+
 
 /*Not Standard*/
-
 enum PIN_INPUT_OUTPUT
 {
     OUTPUT = (uint8_t) 0U,

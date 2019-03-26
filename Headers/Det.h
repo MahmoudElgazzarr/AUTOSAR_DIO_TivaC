@@ -8,6 +8,7 @@
 #ifndef HEADERS_DET_H_
 #define HEADERS_DET_H_
 
+FUNC(Std_ReturnType,DIO_MEM_CLASS) Det_ReportError( VAR(uint16_t,AUTOMATIC) ModuleId,VAR(uint8_t,AUTOMATIC) InstanceId, VAR(uint8_t,AUTOMATIC) ApiId, VAR(uint8_t,AUTOMATIC) ErrorId);
 enum DIO_DET_ERRORS
 {
     DIO_E_PARAM_INVALID_CHANNEL_ID = 0x0A, /* User  passed invalid channel ID */
