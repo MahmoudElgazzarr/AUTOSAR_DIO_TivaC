@@ -20,47 +20,63 @@ Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
     Dio_LevelType Pin_Level;
     Dio_ChannelType arr_index, Channel_Place_In_arr;
 
-    /*Conver Index Of Channel To Arr Index As Index Is Not Configured*/
-    for (arr_index = 0; arr_index < Num_Channels; arr_index++)
+    if ((ChannelId > MIN_NUM_CHANNELS) && (ChannelId < MAX_NUM_CHANNELS))
     {
-        if (ChannelId == Channels_Elements[arr_index].Channel_ID)
+        /*Conver Index Of Channel To Arr Index As Index Is Not Configured*/
+        for (arr_index = 0; arr_index < Num_Channels; arr_index++)
         {
-            Channel_Place_In_arr = arr_index;
+            if (ChannelId == Channels_Elements[arr_index].Channel_ID)
+            {
+                Channel_Place_In_arr = arr_index;
+                break;
+            }
+        }
+        /*Switch Ports and Read From Specified Port*/
+        switch (Channels_Elements[Channel_Place_In_arr].Port)
+        {
+        case (uint8_t) 0:
+            Pin_Level = Get_Bit(
+                    PORTA->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        case (uint8_t) 1:
+            Pin_Level = Get_Bit(
+                    PORTB->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        case (uint8_t) 2:
+            Pin_Level = Get_Bit(
+                    PORTC->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        case (uint8_t) 3:
+            Pin_Level = Get_Bit(
+                    PORTD->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        case (uint8_t) 4:
+            Pin_Level = Get_Bit(
+                    PORTE->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        case (uint8_t) 5:
+            Pin_Level = Get_Bit(
+                    PORTF->DATA,
+                    Channels_Elements[Channel_Place_In_arr].Channel);
+            break;
+        default:
+            /*report Error To Det*/
             break;
         }
+        return Pin_Level;
     }
-    /*Switch Ports and Read From Specified Port*/
-    switch (Channels_Elements[Channel_Place_In_arr].Port)
+    else
     {
-    case (uint8_t) 0:
-        Pin_Level = Get_Bit(PORTA->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    case (uint8_t) 1:
-        Pin_Level = Get_Bit(PORTB->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    case (uint8_t) 2:
-        Pin_Level = Get_Bit(PORTC->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    case (uint8_t) 3:
-        Pin_Level = Get_Bit(PORTD->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    case (uint8_t) 4:
-        Pin_Level = Get_Bit(PORTE->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    case (uint8_t) 5:
-        Pin_Level = Get_Bit(PORTF->DATA,
-                            Channels_Elements[Channel_Place_In_arr].Channel);
-        break;
-    default:
-        /*report Error To Det*/
-        break;
+        #ifdef DIO_DEV_ERROR_DETECT
+        Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
+                        DIO_E_PARAM_INVALID_CHANNEL_ID);
+        #endif
     }
-    return Pin_Level;
 }
 
 /*Syncrounous and Renterant
@@ -177,19 +193,19 @@ void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
         else
         {
             /*Report Invalid Pin Direction*/
-            #ifdef DIO_DEV_ERROR_DETECT
+#ifdef DIO_DEV_ERROR_DETECT
             Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
                             DIO_E_PARAM_INVALID_CHANNEL_ID);
-            #endif
+#endif
         }
     }
     else
     {
         /*Report Invalid Pin Direction*/
-        #ifdef DIO_DEV_ERROR_DETECT
+#ifdef DIO_DEV_ERROR_DETECT
         Det_ReportError(DIO_ModuleId, DIO_InstanceId, DIO_ApiId,
                         DIO_E_PARAM_INVALID_CHANNEL_ID);
-        #endif
+#endif
     }
 
 }
