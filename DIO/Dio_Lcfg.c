@@ -11,8 +11,12 @@
 #include "DIO.h"
 #include "DIO_Internal.h"
 
-Dio_Channel_S_t Elements[Num_Channels] = { { channel39_ID, PORTF_R, Channel1,
+/*Array Of Channels Defined By User*/
+Dio_Channel_S_t Channels_Elements[Num_Channels] = { { channel39_ID, PORTF_R, Channel1,
                                              OUTPUT },
                                            { channel40_ID, PORTF_R, Channel2,
                                              OUTPUT } };
 
+
+/*Array Of Structure of Ports Add By User*/
+Dio_Port_S_t Ports_Elements[Num_Ports] = {{PORTA_ID,PORTA_R,OUTPUT}};

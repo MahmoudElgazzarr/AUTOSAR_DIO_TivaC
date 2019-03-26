@@ -93,6 +93,18 @@ enum Channels_IDS
     channel42_ID,
     cahnnel43_ID,
 };
+
+/*Defines IDS For Ports*/
+enum
+{
+    PORTA_ID,
+    PORTB_ID,
+    PORTC_ID,
+    PORTD_ID,
+    PORTE_ID,
+    PORTF_ID
+};
+
 /*Structure Definiton For Channel Group*/
 typedef struct Dio_ChannelGroup
 {
@@ -113,6 +125,17 @@ typedef struct
     /*input or Output*/
     Dio_DirectionType Dir;
 } Dio_Channel_S_t;
+
+/*Struct To Represent Ports*/
+typedef struct
+{
+    /*element To Specify ID*/
+    Dio_PortType Port_ID;
+    /*Element To Specify Which Port*/
+    Dio_PortType Port;
+    /*Element To Specify Direction*/
+    Dio_DirectionType Dir;
+} Dio_Port_S_t;
 
 /*DIO Read Channel Declaration*/
 Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId);
